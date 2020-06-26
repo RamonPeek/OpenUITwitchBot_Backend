@@ -16,19 +16,19 @@ namespace DAL.Mock
             return model;
         }
 
-        public Command Delete(int id)
+        public Command Delete(string id)
         {
             Command command = GetById(id);
             CommandMemory.Memory.Remove(command);
             return command;
         }
 
-        public Command GetById(int id)
+        public Command GetById(string id)
         {
             return CommandMemory.Memory.Find(c => c.Id == id);
         }
 
-        public Command Update(int id, Command model)
+        public Command Update(string id, Command model)
         {
             Delete(id);
             Create(model);

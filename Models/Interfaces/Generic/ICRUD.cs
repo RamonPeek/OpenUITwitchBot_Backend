@@ -7,9 +7,9 @@ namespace Models.Interfaces
     public interface ICRUD<T>
     {
         T Create(T model);
-        T GetById(int id);
-        T Update(int id, T model);
-        T Delete(int id);
+        T GetById(string id);
+        T Update(string id, T model);
+        T Delete(string id);
 
     }
 }

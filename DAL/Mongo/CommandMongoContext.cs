@@ -1,5 +1,7 @@
 ﻿using DAL.Interfaces;
+using DAL.Mongo.Connector;
 using Models;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,24 +10,29 @@ namespace DAL.Mongo
 {
     public class CommandMongoContext : ICommandContext
     {
+
+        private IMongoCollection<Command> CommandCollection = new MongoConnector().Database.GetCollection<Command>("commands");
+
         public Command Create(Command model)
         {
-            throw new NotImplementedException();
+            CommandCollection.InsertOne(model);
+            return model;
         }
 
-        public Command Delete(int id)
+        public Command Delete(string id)
         {
-            throw new NotImplementedException();
+            return CommandCollection.FindOneAndDelete(c => c.Id == id);
         }
 
-        public Command GetById(int id)
+        public Command GetById(string id)
         {
-            throw new NotImplementedException();
+            return CommandCollection.Find(c => c.Id == id).FirstOrDefault();
         }
 
-        public Command Update(int id, Command model)
+        public Command Update(string id, Command model)
         {
-            throw new NotImplementedException();
+            CommandCollection.ReplaceOne(c => c.Id == id, model);
+            return model;
         }
     }
 }

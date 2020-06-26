@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,12 +8,15 @@ namespace Models
 {
     public class Command
     {
-        public int Id { get; set; }
+        [BsonId]
+        public string Id { get; set; }
+
+        [BsonElement("text")]
         public string Text { get; set; }
 
         public Command() {}
 
-        public Command(int id, string text)
+        public Command(string id, string text)
         {
             this.Id = id;
             this.Text = text;

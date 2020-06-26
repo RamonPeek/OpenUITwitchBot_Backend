@@ -22,17 +22,17 @@ namespace Repositories
             return Context.Create(model);
         }
 
-        public Command Delete(int id)
+        public Command Delete(string id)
         {
             return Context.Delete(id);
         }
 
-        public Command GetById(int id)
+        public Command GetById(string id)
         {
             return Context.GetById(id);
         }
 
-        public Command Update(int id, Command model)
+        public Command Update(string id, Command model)
         {
             return Context.Update(id, model);
         }

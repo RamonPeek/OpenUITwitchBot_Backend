@@ -23,18 +23,18 @@ namespace Services
             return Repository.Create(model);
         }
 
-        public Command Delete(int id)
+        public Command Delete(string id)
         {
             if (GetById(id) == null) return null;
             return Repository.Delete(id);
         }
 
-        public Command GetById(int id)
+        public Command GetById(string id)
         {
             return Repository.GetById(id);
         }
 
-        public Command Update(int id, Command model)
+        public Command Update(string id, Command model)
         {
             if (GetById(id) == null) return null;
             return Repository.Update(id, model);

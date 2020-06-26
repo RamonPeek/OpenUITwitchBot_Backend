@@ -31,7 +31,7 @@ namespace OpenUITwitchBot.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult GetById(int commandId)
+        public IActionResult GetById(string commandId)
         {
             Command commandResult = CommandService.GetById(commandId);
             if (commandResult == null)
@@ -40,7 +40,7 @@ namespace OpenUITwitchBot.Controllers
         }
 
         [HttpPut("")]
-        public IActionResult Update(int commandId, Command command)
+        public IActionResult Update(string commandId, Command command)
         {
             Command commandResult = CommandService.Update(commandId, command);
             if (commandResult == null)
@@ -49,7 +49,7 @@ namespace OpenUITwitchBot.Controllers
         }
 
         [HttpDelete("")]
-        public IActionResult Delete(int commandId)
+        public IActionResult Delete(string commandId)
         {
             Command commandResult = CommandService.Delete(commandId);
             if (commandResult == null)

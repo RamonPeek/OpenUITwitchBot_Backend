@@ -12,10 +12,10 @@ namespace DAL.Mock.Memory
         static CommandMemory()
         {
             List<Command> data = new List<Command>();
-            data.Add(new Command(0, "text0"));
-            data.Add(new Command(1, "text1"));
-            data.Add(new Command(2, "text2"));
-            data.Add(new Command(3, "text3"));
+            data.Add(new Command("shddgsagd", "text0"));
+            data.Add(new Command("sdasgfdsg", "text1"));
+            data.Add(new Command("bvcbvcbbc", "text2"));
+            data.Add(new Command("bvcbvchff", "text3"));
             Memory = data;
         }
     }
