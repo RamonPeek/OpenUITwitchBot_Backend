@@ -5,13 +5,15 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenUITwitchBot", "OpenUITwitchBot\OpenUITwitchBot.csproj", "{B9E1C9E5-35DB-472D-A3E4-516882C758E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{A38C486F-9C92-4955-8673-4243B9C1F784}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{A38C486F-9C92-4955-8673-4243B9C1F784}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{3D986A5E-6A1B-40CB-AEF5-8D2060A1E9A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{3D986A5E-6A1B-40CB-AEF5-8D2060A1E9A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{2751FBB4-9790-4D1E-97A8-8CBD11750557}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{2751FBB4-9790-4D1E-97A8-8CBD11750557}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{95DC6D0A-B92A-43DC-8DFA-285654336BCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{95DC6D0A-B92A-43DC-8DFA-285654336BCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factories", "Factories\Factories.csproj", "{02915296-2768-489F-B83D-C74184F9D150}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{95DC6D0A-B92A-43DC-8DFA-285654336BCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95DC6D0A-B92A-43DC-8DFA-285654336BCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95DC6D0A-B92A-43DC-8DFA-285654336BCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02915296-2768-489F-B83D-C74184F9D150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02915296-2768-489F-B83D-C74184F9D150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02915296-2768-489F-B83D-C74184F9D150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02915296-2768-489F-B83D-C74184F9D150}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
