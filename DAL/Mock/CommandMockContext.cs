@@ -23,6 +23,11 @@ namespace DAL.Mock
             return command;
         }
 
+        public List<Command> GetAll()
+        {
+            return CommandMemory.Memory;
+        }
+
         public Command GetById(string id)
         {
             return CommandMemory.Memory.Find(c => c.Id == id);

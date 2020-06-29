@@ -24,6 +24,11 @@ namespace DAL.Mongo
             return CommandCollection.FindOneAndDelete(c => c.Id == id);
         }
 
+        public List<Command> GetAll()
+        {
+            return CommandCollection.AsQueryable().ToList();
+        }
+
         public Command GetById(string id)
         {
             return CommandCollection.Find(c => c.Id == id).FirstOrDefault();

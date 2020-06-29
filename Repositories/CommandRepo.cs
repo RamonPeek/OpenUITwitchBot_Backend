@@ -36,5 +36,10 @@ namespace Repositories
         {
             return Context.Update(id, model);
         }
+
+        public List<Command> GetAll()
+        {
+            return Context.GetAll();
+        }
     }
 }

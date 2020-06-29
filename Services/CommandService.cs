@@ -19,7 +19,7 @@ namespace Services
 
         public Command Create(Command model)
         {
-            if (GetById(model.Id) != null) return null;
+            if (GetById(model.Id.ToString()) != null) return null;
             return Repository.Create(model);
         }
 
@@ -37,7 +37,13 @@ namespace Services
         public Command Update(string id, Command model)
         {
             if (GetById(id) == null) return null;
+            if (model.Id.ToString() != id) return null;
             return Repository.Update(id, model);
+        }
+
+        public List<Command> GetAll()
+        {
+            return Repository.GetAll();
         }
     }
 }

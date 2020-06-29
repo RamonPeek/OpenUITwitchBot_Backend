@@ -10,6 +10,7 @@ namespace Models.Interfaces
         T GetById(string id);
         T Update(string id, T model);
         T Delete(string id);
+        List<T> GetAll();
 
     }
 }
