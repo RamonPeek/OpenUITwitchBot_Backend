@@ -13,8 +13,8 @@ namespace DAL.Mock
         {
             foreach(Credentials storedCredentials in AuthMemory.Memory)
             {
-                if (storedCredentials.Email.Equals(credentials.Email, StringComparison.InvariantCultureIgnoreCase) &&
-                    storedCredentials.Password.Equals(credentials.Password))
+                if (storedCredentials.Email.ToLower() == credentials.Email.ToLower() &&
+                    storedCredentials.Password == credentials.Password)
                 {
                     return storedCredentials.UserId;
                 }

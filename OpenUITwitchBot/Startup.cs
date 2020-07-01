@@ -108,7 +108,11 @@ namespace OpenUITwitchBot
 
             app.UseRouting();
 
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(options =>
+            {
+                options.WithOrigins("http://localhost:8080").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
+            });
+            //app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 

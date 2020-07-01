@@ -28,11 +28,13 @@ namespace OpenUITwitchBot.Controllers
         }
 
         [HttpPost("")]
+        [AllowAnonymous]
         public IActionResult Create(UserWithCredentials userWithCredentials)
         {
             User userResult = UserService.Create(userWithCredentials.User, userWithCredentials.Credentials);
             if (userResult == null)
                 return BadRequest();
+            userWithCredentials.Credentials.UserId = userResult.Id;
             bool credentialsResult = AuthService.CreateCredentials(userWithCredentials.Credentials);
             if (credentialsResult == false)
                 return BadRequest();
