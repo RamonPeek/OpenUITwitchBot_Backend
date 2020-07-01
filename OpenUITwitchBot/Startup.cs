@@ -51,16 +51,42 @@ namespace OpenUITwitchBot
             services.AddControllers();
             services.AddSwaggerGen((options) =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                options.SwaggerDoc("v2", new OpenApiInfo { Title = "My API", Version = "v2" });
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter the JWT with Bearer into the field.",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] {}
+                    }
+                });
             });
+            
+            //SINGLETONS
             services.AddSingleton<ICommandService>(new CommandFactory().Create());
+            services.AddSingleton<IUserService>(new UserFactory().Create());
+            services.AddSingleton<IAuthService>(new AuthFactory().Create());
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder.WithOrigins("http://localhost:8080");
-                                  });
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:8080");
+                    });
             });
         }
 
@@ -76,7 +102,7 @@ namespace OpenUITwitchBot
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v2/swagger.json", "My API V2"));
 
             app.UseHttpsRedirection();
 

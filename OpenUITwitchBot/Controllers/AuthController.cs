@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models;
+using Services.Interfaces;
 
 namespace OpenUITwitchBot.Controllers
 {
@@ -21,17 +22,22 @@ namespace OpenUITwitchBot.Controllers
 
         private IConfiguration Configuration;
 
-        public AuthController(IConfiguration configuration)
+        private IAuthService AuthService { get; set; }
+        private IUserService UserService { get; set; }
+
+        public AuthController(IConfiguration configuration, IAuthService authService, IUserService userService)
         {
-            this.Configuration = configuration;
+            Configuration = configuration;
+            AuthService = authService;
+            UserService = userService;
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Authenticate([FromBody] Credentials credentials)
+        public IActionResult Authenticate(Credentials credentials)
         {
-            //TODO ASK SERVICE TO RETRIEVE USER BASED ON CREDENTIALS
-            User user = new User("dausdhakjdh", "Ramon", "Peek");
+            String userId = AuthService.Authenticate(credentials);
+            User user = UserService.GetById(userId);
             if (user == null)
                 return NotFound();
             return Ok(new { token = GenerateJSONWebToken(user) });

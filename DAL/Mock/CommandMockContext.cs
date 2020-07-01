@@ -19,7 +19,8 @@ namespace DAL.Mock
         public Command Delete(string id)
         {
             Command command = GetById(id);
-            CommandMemory.Memory.Remove(command);
+            if(command != null)
+                CommandMemory.Memory.Remove(command);
             return command;
         }
 

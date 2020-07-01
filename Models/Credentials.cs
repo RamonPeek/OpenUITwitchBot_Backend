@@ -8,6 +8,9 @@ namespace Models
     public class Credentials
     {
 
+        [BsonId]
+        public string UserId { get; set; }
+
         [BsonElement("email")]
         public string Email { get; set; }
 
@@ -16,8 +19,9 @@ namespace Models
 
         public Credentials() { }
 
-        public Credentials(string email, string password)
+        public Credentials(string userId, string email, string password)
         {
+            this.UserId = userId;
             this.Email = email;
             this.Password = password;
         }

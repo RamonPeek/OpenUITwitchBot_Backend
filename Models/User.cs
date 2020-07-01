@@ -11,19 +11,15 @@ namespace Models
         [BsonId]
         public string Id { get; set; }
 
-        [BsonElement("firstname")]
-        public string FirstName { get; set; }
-
-        [BsonElement("lastname")]
-        public string LastName { get; set; }
+        [BsonElement("twitch_account")]
+        public TwitchAccount TwitchAccount { get; set; }
 
         public User() { }
 
-        public User(string id, string firstname, string lastname)
+        public User(string id, TwitchAccount twitchAccount)
         {
             this.Id = id;
-            this.FirstName = firstname;
-            this.LastName = lastname;
+            this.TwitchAccount = twitchAccount;
         }
 
     }

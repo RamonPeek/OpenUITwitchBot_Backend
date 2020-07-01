@@ -1,5 +1,4 @@
 ﻿using DAL.Mock;
-using DAL.Mongo;
 using Factories.Generic;
 using Repositories;
 using Services;
@@ -10,12 +9,11 @@ using System.Text;
 
 namespace Factories
 {
-    public class CommandFactory : IFactory<ICommandService>
+    public class AuthFactory : IFactory<IAuthService>
     {
-
-        public ICommandService Create()
+        public IAuthService Create()
         {
-            return new CommandService(new CommandRepo(new CommandMockContext()));
+            return new AuthService(new AuthRepo(new AuthMockContext()));
         }
     }
 }
