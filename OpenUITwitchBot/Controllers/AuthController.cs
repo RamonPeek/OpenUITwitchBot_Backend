@@ -47,9 +47,9 @@ namespace OpenUITwitchBot.Controllers
         public IActionResult validateSession()
         {
             ClaimsIdentity identity = User.Identity as ClaimsIdentity;
-            string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (userId == null)
-                return NotFound();
+                return Unauthorized();
             return Ok(userId);
         }
 
