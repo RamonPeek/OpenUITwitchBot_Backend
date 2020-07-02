@@ -43,6 +43,16 @@ namespace OpenUITwitchBot.Controllers
             return Ok(new { token = GenerateJSONWebToken(user) });
         }
 
+        [HttpPost("validate")]
+        public IActionResult validateSession()
+        {
+            ClaimsIdentity identity = User.Identity as ClaimsIdentity;
+            string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            if (userId == null)
+                return NotFound();
+            return Ok(userId);
+        }
+
         private string GenerateJSONWebToken(User user)
         {
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]));
