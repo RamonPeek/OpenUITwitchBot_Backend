@@ -39,7 +39,7 @@ namespace OpenUITwitchBot.Controllers
             String userId = AuthService.Authenticate(credentials);
             User user = UserService.GetById(userId);
             if (user == null)
-                return NotFound();
+                return Unauthorized();
             return Ok(new { token = GenerateJSONWebToken(user) });
         }
 
@@ -49,7 +49,7 @@ namespace OpenUITwitchBot.Controllers
             ClaimsIdentity identity = User.Identity as ClaimsIdentity;
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (userId == null)
-                return Unauthorized();
+                return Unauthorized("Your session has expired.");
             return Ok(userId);
         }
 

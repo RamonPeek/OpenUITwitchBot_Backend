@@ -89,7 +89,7 @@ namespace OpenUITwitchBot
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:8080");
+                        builder.WithOrigins(new string[] { "https://openuitwitchbot.azurewebsites.net", "http://localhost:8080" });
                     });
             });
         }
@@ -114,7 +114,7 @@ namespace OpenUITwitchBot
 
             app.UseCors(options =>
             {
-                options.WithOrigins("http://localhost:8080").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
+                options.WithOrigins(new string[] { "https://openuitwitchbot.azurewebsites.net", "http://localhost:8080" }).AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
             });
             //app.UseCors(MyAllowSpecificOrigins);
 
