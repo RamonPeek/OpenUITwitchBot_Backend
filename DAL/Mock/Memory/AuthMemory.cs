@@ -16,25 +16,29 @@ namespace DAL.Mock.Memory
             {
                 UserId = "shddgsagd",
                 Email = "mock0@admin.nl",
-                Password = "Admin123!"
+                Password = "Admin123!",
+                Salt = "abcdefghijkl"
             });
             data.Add(new Credentials()
             {
                 UserId = "sdasgfdsg",
                 Email = "mock1@admin.nl",
-                Password = "Admin123!"
+                Password = "Admin123!",
+                Salt = "abcdefghijkl"
             });
             data.Add(new Credentials()
             {
                 UserId = "bvcbvcbbc",
                 Email = "mock2@admin.nl",
-                Password = "Admin123!"
+                Password = "Admin123!",
+                Salt = "abcdefghijkl"
             });
             data.Add(new Credentials()
             {
                 UserId = "gsfsfdsff",
                 Email = "mock3@admin.nl",
-                Password = "Admin123!"
+                Password = "Admin123!",
+                Salt = "abcdefghijkl"
             });
             Memory = data;
         }

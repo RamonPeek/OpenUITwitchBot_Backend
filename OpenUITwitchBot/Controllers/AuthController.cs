@@ -4,9 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
+using Helpers;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -36,6 +35,7 @@ namespace OpenUITwitchBot.Controllers
         [HttpPost]
         public IActionResult Authenticate(Credentials credentials)
         {
+            //Hash the password
             String userId = AuthService.Authenticate(credentials);
             User user = UserService.GetById(userId);
             if (user == null)
@@ -66,8 +66,6 @@ namespace OpenUITwitchBot.Controllers
                 expires: DateTime.Now.AddHours(2),
                 signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);
-
         }
-
     }
 }

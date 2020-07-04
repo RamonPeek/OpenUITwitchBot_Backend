@@ -1,5 +1,6 @@
 ﻿using DAL.Interfaces;
 using DAL.Mongo.Connector;
+using Helpers;
 using Models;
 using MongoDB.Driver;
 using System;
@@ -18,7 +19,7 @@ namespace DAL.Mongo
             foreach(Credentials storedCredentials in CredentialsCollection.AsQueryable().ToList())
             {
                 if(storedCredentials.Email.Equals(credentials.Email, StringComparison.InvariantCultureIgnoreCase) &&
-                   storedCredentials.Password.Equals(credentials.Password))
+                   storedCredentials.Password == HashHelper.Hash(credentials.Password, storedCredentials.Salt))
                 {
                     return storedCredentials.UserId;
                 }

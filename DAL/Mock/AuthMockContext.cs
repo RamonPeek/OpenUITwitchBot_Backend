@@ -1,5 +1,6 @@
 ﻿using DAL.Interfaces;
 using DAL.Mock.Memory;
+using Helpers;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace DAL.Mock
             foreach(Credentials storedCredentials in AuthMemory.Memory)
             {
                 if (storedCredentials.Email.ToLower() == credentials.Email.ToLower() &&
-                    storedCredentials.Password == credentials.Password)
+                    storedCredentials.Password == HashHelper.Hash(credentials.Password, storedCredentials.Salt))
                 {
                     return storedCredentials.UserId;
                 }

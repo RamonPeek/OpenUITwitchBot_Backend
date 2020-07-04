@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,9 @@ namespace OpenUITwitchBot.Controllers
             if (userResult == null)
                 return BadRequest();
             userWithCredentials.Credentials.UserId = userResult.Id;
+            //Create salt and hash password
+            userWithCredentials.Credentials.Salt = HashHelper.GenerateSalt();
+            userWithCredentials.Credentials.Password = HashHelper.Hash(userWithCredentials.Credentials.Password, userWithCredentials.Credentials.Salt);
             bool credentialsResult = AuthService.CreateCredentials(userWithCredentials.Credentials);
             if (credentialsResult == false)
                 return BadRequest();

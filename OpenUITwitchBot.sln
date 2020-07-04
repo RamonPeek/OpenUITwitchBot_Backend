@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{95DC6D0A-B92A-43DC-8DFA-285654336BCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factories", "Factories\Factories.csproj", "{02915296-2768-489F-B83D-C74184F9D150}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Factories", "Factories\Factories.csproj", "{02915296-2768-489F-B83D-C74184F9D150}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{3C53494D-A91F-45FF-B3FF-A14879CE0F59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{02915296-2768-489F-B83D-C74184F9D150}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02915296-2768-489F-B83D-C74184F9D150}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02915296-2768-489F-B83D-C74184F9D150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C53494D-A91F-45FF-B3FF-A14879CE0F59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C53494D-A91F-45FF-B3FF-A14879CE0F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C53494D-A91F-45FF-B3FF-A14879CE0F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C53494D-A91F-45FF-B3FF-A14879CE0F59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
