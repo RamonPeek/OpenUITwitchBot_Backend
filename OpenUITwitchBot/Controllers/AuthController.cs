@@ -55,13 +55,13 @@ namespace OpenUITwitchBot.Controllers
 
         private string GenerateJSONWebToken(User user)
         {
-            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY")));
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_SECRET"]));
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
             JwtSecurityToken token = new JwtSecurityToken(
-                Environment.GetEnvironmentVariable("JWT_ISSUER"),
-                Environment.GetEnvironmentVariable("JWT_ISSUER"),
+                Configuration["JWT_ISSUER"],
+                Configuration["JWT_ISSUER"],
                 claims,
                 expires: DateTime.Now.AddHours(2),
                 signingCredentials: credentials);
