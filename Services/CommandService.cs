@@ -19,7 +19,9 @@ namespace Services
 
         public Command Create(Command model)
         {
-            if (GetById(model.Id.ToString()) != null) return null;
+            model.Id = Guid.NewGuid().ToString();
+            if (GetById(model.Id.ToString()) != null)
+                return null;
             return Repository.Create(model);
         }
 

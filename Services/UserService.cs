@@ -19,6 +19,7 @@ namespace Services
 
         public User Create(User model, Credentials credentials)
         {
+            model.Id = Guid.NewGuid().ToString();
             User createdUser = Repository.Create(model);
             if (createdUser == null)
                 return null;
