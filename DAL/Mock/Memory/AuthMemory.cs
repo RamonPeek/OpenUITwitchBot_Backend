@@ -24,7 +24,7 @@ namespace DAL.Mock.Memory
                 UserId = "sdasgfdsg",
                 Email = "mock1@admin.nl",
                 Password = "Admin123!",
-                Salt = "abcdefghijkl"
+                Salt = "abcdefghijklm"
             });
             data.Add(new Credentials()
             {
