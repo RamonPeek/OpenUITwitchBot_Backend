@@ -6,7 +6,7 @@ namespace Models
 {
     public enum CommandType
     {
-        TEXT,
+        CHAT_REPLY,
         SOUND
     }
 }

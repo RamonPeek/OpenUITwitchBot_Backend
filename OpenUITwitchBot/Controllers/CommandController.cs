@@ -66,6 +66,21 @@ namespace OpenUITwitchBot.Controllers
             return Ok(commandsResult);
         }
 
+        [HttpGet("types")]
+        public IActionResult GetCommandTypeNames()
+        {
+            List<string> commandTypeNames = Enum.GetNames(typeof(CommandType)).ToList();
+            return Ok(commandTypeNames);
+        }
+
+        [HttpGet("type")]
+        public IActionResult GetCommandTypeIdByName(string name)
+        {
+            int? id = Convert.ToInt32(Enum.Parse(typeof(CommandType), name));
+            if (id == null)
+                return BadRequest("You have to provide a valid command-type.");
+            return Ok(id);
+        }
 
     }
 }
