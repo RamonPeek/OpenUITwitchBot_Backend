@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +20,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Models;
+using OpenUITwitchBot.Hubs;
 using Services;
 using Services.Interfaces;
 
@@ -38,9 +41,13 @@ namespace OpenUITwitchBot
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            services.AddAuthentication(options =>
             {
-                var s = Configuration;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = /* TODO: Insert Authority URL here */null;
                 options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -48,11 +55,26 @@ namespace OpenUITwitchBot
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["JWT_ISSUER"],
-                    ValidAudience = Configuration["JWT_ISSUER"],
+                    ValidIssuer = Configuration["VUE_APP_ROOT"],
+                    ValidAudience = Configuration["VUE_APP_ROOT"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_SECRET"]))
                 };
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            (path.StartsWithSegments("/hub")))
+                        {
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
             });
+
             services.AddControllers();
             services.AddSwaggerGen((options) =>
             {
@@ -79,18 +101,23 @@ namespace OpenUITwitchBot
                     }
                 });
             });
-            
+
+            services.AddHttpContextAccessor();
+            services.AddHttpClient();
+            services.AddSignalR();
+
             //SINGLETONS
             services.AddSingleton<ICommandService>(new CommandFactory().Create());
             services.AddSingleton<IUserService>(new UserFactory().Create());
             services.AddSingleton<IAuthService>(new AuthFactory().Create());
+            services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
 
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins(new string[] { "https://openuitwitchbot.azurewebsites.net", "http://localhost:8080" });
+                        builder.WithOrigins(new string[] { Configuration["VUE_APP_ROOT"], "https://api.twitch.tv" });
                     });
             });
         }
@@ -115,7 +142,7 @@ namespace OpenUITwitchBot
 
             app.UseCors(options =>
             {
-                options.WithOrigins(new string[] { "https://openuitwitchbot.azurewebsites.net", "http://localhost:8080" }).AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
+                options.WithOrigins(new string[] { Configuration["VUE_APP_ROOT"], "https://api.twitch.tv" }).AllowAnyMethod().AllowAnyHeader().AllowCredentials();
             });
             //app.UseCors(MyAllowSpecificOrigins);
 
@@ -124,6 +151,9 @@ namespace OpenUITwitchBot
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<UserHub>("/hub/user");
+                endpoints.MapHub<SubscriptionHub>("/hub/subscription");
+                endpoints.MapHub<StreamHub>("/hub/stream");
             });
         }
     }

@@ -15,7 +15,8 @@ namespace Factories
 
         public ICommandService Create()
         {
-            return new CommandService(new CommandRepo(new CommandMockContext()));
+            //return new CommandService(new CommandRepo(new CommandMockContext()));
+            return new CommandService(new CommandRepo(new CommandMongoContext()));
         }
     }
 }

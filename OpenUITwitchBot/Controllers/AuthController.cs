@@ -59,9 +59,11 @@ namespace OpenUITwitchBot.Controllers
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
+            claims.Add(new Claim(ClaimTypes.Name, user.Id));
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
             JwtSecurityToken token = new JwtSecurityToken(
-                Configuration["JWT_ISSUER"],
-                Configuration["JWT_ISSUER"],
+                Configuration["VUE_APP_ROOT"],
+                Configuration["VUE_APP_ROOT"],
                 claims,
                 expires: DateTime.Now.AddHours(2),
                 signingCredentials: credentials);

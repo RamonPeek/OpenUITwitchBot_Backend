@@ -1,4 +1,5 @@
 ﻿using DAL.Mock;
+using DAL.Mongo;
 using Factories.Generic;
 using Repositories;
 using Services;
@@ -13,7 +14,8 @@ namespace Factories
     {
         public IAuthService Create()
         {
-            return new AuthService(new AuthRepo(new AuthMockContext()));
+            //return new AuthService(new AuthRepo(new AuthMockContext()));
+            return new AuthService(new AuthRepo(new AuthMongoContext()));
         }
     }
 }
