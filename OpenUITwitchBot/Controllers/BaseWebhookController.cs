@@ -24,14 +24,13 @@ namespace OpenUITwitchBot.WebhookReceivers
 
         private readonly IHttpClientFactory ClientFactory;
         private readonly string BaseUrl = "https://api.twitch.tv/helix";
-        private string twitchSecret = "o1yqitny7na6mh1fs11mk17v0dkwzc";
         
         private IConfiguration Configuration;
 
         private IUserService UserService { get; set; }
 
         [HttpGet("subscribe")]
-        public async Task<IActionResult> HandleSubscribe(string callBackUrl, string topicUrl)
+        public async Task<IActionResult> HandleSubscribe(string callBackUrl, string topicUrl, string oAuthToken)
         {
             ClaimsIdentity identity = User.Identity as ClaimsIdentity;
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -43,8 +42,8 @@ namespace OpenUITwitchBot.WebhookReceivers
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Post,
                 this.BaseUrl + "/webhooks/hub");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", user.TwitchAccount.OAuthToken);
-            request.Headers.Add("Client-Id", Configuration["TWITCH_CLIENT_SECRET"]);  
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", oAuthToken);
+            request.Headers.Add("Client-Id", Configuration["TWITCH_CLIENT_ID"]);  
             request.Content = new StringContent(
                 "{\"hub.callback\":\""+ callBackUrl + "\"," + 
                     "\"hub.mode\":\"subscribe\"," +
@@ -60,7 +59,7 @@ namespace OpenUITwitchBot.WebhookReceivers
         }
 
         [HttpGet("unsubscribe")]
-        public async Task<IActionResult> HandleUnsubscribe(string callBackUrl, string topicUrl)
+        public async Task<IActionResult> HandleUnsubscribe(string callBackUrl, string topicUrl, string oAuthToken)
         {
             ClaimsIdentity identity = User.Identity as ClaimsIdentity;
             string userId = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
@@ -72,8 +71,8 @@ namespace OpenUITwitchBot.WebhookReceivers
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Post,
                 this.BaseUrl + "/webhooks/hub");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", user.TwitchAccount.OAuthToken);
-            request.Headers.Add("Client-Id", Configuration["TWITCH_CLIENT_SECRET"]);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", oAuthToken);
+            request.Headers.Add("Client-Id", Configuration["TWITCH_CLIENT_ID"]);
             request.Content = new StringContent(
                 "{\"hub.callback\":\"" + callBackUrl + "\"," +
                     "\"hub.mode\":\"unsubscribe\"," +

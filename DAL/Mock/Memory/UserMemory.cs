@@ -15,7 +15,6 @@ namespace DAL.Mock.Memory
             List<User> data = new List<User>();
             data.Add(new User("shddgsagd", new TwitchAccount() { 
                 Id = "1234567890",
-                OAuthToken = "oauth:dagduayhsgasfdhgafshgdfahsgfdafshdha",
                 DisplayName = "MockChannel1",
                 Description = "MockChannelDescription1",
                 ViewCount = 4387438,
@@ -24,7 +23,6 @@ namespace DAL.Mock.Memory
             data.Add(new User("sdasgfdsg", new TwitchAccount()
             {
                 Id = "23671537625",
-                OAuthToken = "oauth:cxnzcbmzxnbvcmzbxzxcbzvzbvxcbnzvcbvcx",
                 DisplayName = "MockChannel2",
                 Description = "MockChannelDescription2",
                 ViewCount = 12323,
@@ -33,7 +31,6 @@ namespace DAL.Mock.Memory
             data.Add(new User("bvcbvcbbc", new TwitchAccount()
             {
                 Id = "33673663",
-                OAuthToken = "oauth:oiqweioqwueyqwiteqwtyuetqweyuqteuyqte",
                 DisplayName = "MockChannel3",
                 Description = "MockChannelDescription3",
                 ViewCount = 7767656,
@@ -42,7 +39,6 @@ namespace DAL.Mock.Memory
             data.Add(new User("gsfsfdsff", new TwitchAccount()
             {
                 Id = "12121212",
-                OAuthToken = "oauth:ppmjkmuyokmjklmuikjmuokmjuojmikoumjok",
                 DisplayName = "MockChannel4",
                 Description = "MockChannelDescription4",
                 ViewCount = 21212121,

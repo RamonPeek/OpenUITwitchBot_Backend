@@ -10,9 +10,6 @@ namespace Models
         [BsonId]
         public string Id { get; set; }
 
-        [BsonElement("oauth_token")]
-        public string OAuthToken { get; set; }
-
         [BsonElement("display_name")]
         public string DisplayName { get; set; }
 
@@ -27,10 +24,9 @@ namespace Models
 
         public TwitchAccount() { }
 
-        public TwitchAccount(string id, string oAuthToken, string displayName, string description, string profileImageUrl, int viewCount)
+        public TwitchAccount(string id, string displayName, string description, string profileImageUrl, int viewCount)
         {
             this.Id = id;
-            this.OAuthToken = oAuthToken;
             this.DisplayName = displayName;
             this.Description = description;
             this.ProfileImageUrl = profileImageUrl;
